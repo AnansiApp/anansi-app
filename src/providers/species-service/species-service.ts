@@ -11,12 +11,14 @@ import { Specie } from '../../models/specie';
 @Injectable()
 export class SpeciesServiceProvider {
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient) {}
 
+  listSpecies() {
+    return this._http.get<Specie[]>('http://localhost:8080/api/spider/species');
   }
 
-  list() {
-    return this._http.get<Specie[]>('http://localhost:8080/species');
+  getByName(name) {
+    return this._http.get<Specie[]>('http://localhost:8080/api/spider/species/get?name=' + name);
   }
 
 }

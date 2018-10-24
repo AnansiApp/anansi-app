@@ -18,14 +18,33 @@ export class SearchPage implements NavLifecycles {
     private _speciesService: SpeciesServiceProvider,
     private _alertCtrl: AlertController) {}
 
-    ionViewDidLoad() {
+  ionViewDidLoad() {
+      this.loadSpecies();
+  }
+
+  getSpecies(ev: any){
+    let loading = this._loadingCtrl.create({
+      content: "Carregando..."
+    });
+    const filter = ev.target.value;
+    this._speciesService.getByName(filter)
+    .subscribe(
+      (species) => {
+        this.species = species;
+        loading.dismiss();
+      },
+    );      
+
+    }
+
+    loadSpecies(filter?){
       let loading = this._loadingCtrl.create({
         content: "Carregando..."
       });
   
       loading.present();
   
-      this._speciesService.list()
+      this._speciesService.listSpecies()
       .subscribe(
         (species) => {
           this.species = species;

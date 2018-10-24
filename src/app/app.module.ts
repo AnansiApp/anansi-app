@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 import { SpeciesServiceProvider } from '../providers/species-service/species-service';
+import { QuestionsServiceProvider } from '../providers/questions-service/questions-service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { SpeciesServiceProvider } from '../providers/species-service/species-ser
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SpeciesServiceProvider,
-    SpeciesServiceProvider
+    QuestionsServiceProvider
   ]
 })
 export class AppModule {}
