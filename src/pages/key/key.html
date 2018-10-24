@@ -7,5 +7,13 @@
 </ion-header>
 
 <ion-content padding>
-
+    <ion-title>{{currentQuestion?.content}}</ion-title>
+    <ion-list>
+        <ion-item *ngFor= "let option of currentQuestion?.options">
+            <ion-thumbnail item-start>
+              <img src="https://lh6.googleusercontent.com/3G7gSDKA_DBz_Plv0iZexEy9UJGsokZg3KRBv_IlZWlI8EewtgO2lKtKYzgH0B0Ujo2erndmVIc3p5DPq9Wl=w1366-h573-rw">
+            </ion-thumbnail>
+            <p>{{option.description}}</p>
+        </ion-item>
+      </ion-list>
 </ion-content>
