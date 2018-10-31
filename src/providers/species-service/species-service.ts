@@ -21,4 +21,8 @@ export class SpeciesServiceProvider {
     return this._http.get<Specie[]>('http://localhost:8080/api/spider/species/get?name=' + name);
   }
 
+  getImage(specie){
+    return this._http.get<Specie[]>('http://localhost:8080/api/spider/specie-image?name=' + specie);
+  }
+
 }
