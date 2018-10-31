@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GenericService } from '../generic-service';
 
 /*
   Generated class for the ImageServiceProvider provider.
@@ -8,12 +9,14 @@ import { Injectable } from '@angular/core';
   and Angular DI.
 */
 @Injectable()
-export class ImageServiceProvider {
+export class ImageServiceProvider extends GenericService {
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) {
+    super();
+  }
 
   getImage(address){
-    return 'http://localhost:8080/api/image/get?address=' 
+    return this.apiUrl + '/image/get?address=' 
     + address;
   }
 

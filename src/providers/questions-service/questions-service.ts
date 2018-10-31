@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Question } from '../../models/question';
 import { Option } from '../../models/option';
+import { GenericService } from '../generic-service';
 
 /*
   Generated class for the QuestionsServiceProvider provider.
@@ -10,21 +11,23 @@ import { Option } from '../../models/option';
   and Angular DI.
 */
 @Injectable()
-export class QuestionsServiceProvider {
+export class QuestionsServiceProvider extends GenericService{
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) {
+    super();
+  }
 
   getFirstQuestion(){
-    return this._http.get<Question>('http://localhost:8080/api/question/first_question');
+    return this._http.get<Question>(this.apiUrl + '/question/first_question');
   }
 
   getNextQuestion(question, option){
-    return this._http.get<Question>('http://localhost:8080/api/question/next_question?idCurrentQuestion=' 
+    return this._http.get<Question>(this.apiUrl + '/question/next_question?idCurrentQuestion=' 
     + question + '&idOption=' + option);
   }
 
   getOptionImage(option: Option){
-    return 'http://localhost:8080/api/question/option_image?address=' 
+    return this.apiUrl + '/question/option_image?address=' 
     + option.imageAddress;
   }
 
