@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http'
 import { Specie } from '../../models/specie';
 import { SpeciesServiceProvider } from '../../providers/species-service/species-service';
 import { NavLifecycles } from '../../utils/ionic/nav/nav-lifecycle';
+import { DetailPage } from '../detail/detail';
 
 @Component({
   selector: 'page-search',
@@ -62,5 +63,11 @@ export class SearchPage implements NavLifecycles {
         }
       );
     }
+
+  selectSpecie(specie: Specie){
+      this.navCtrl.push(DetailPage, {
+        specie: specie
+      });
+  }
 
 }

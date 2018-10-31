@@ -5,6 +5,7 @@ import { QuestionsServiceProvider } from '../../providers/questions-service/ques
 import { HttpErrorResponse } from '@angular/common/http';
 import { NavLifecycles } from '../../utils/ionic/nav/nav-lifecycle';
 import { Option } from '../../models/option';
+import { ImageServiceProvider } from '../../providers/image-service/image-service';
 
 @Component({
   selector: 'page-key',
@@ -17,6 +18,7 @@ export class KeyPage implements NavLifecycles{
 
   constructor(public navCtrl: NavController,
     private _questionsService: QuestionsServiceProvider,
+    private _imageService: ImageServiceProvider,
     private _alertCtrl: AlertController) {
     }
 
@@ -56,7 +58,7 @@ export class KeyPage implements NavLifecycles{
   }
 
   getOptionImage(option: Option){
-    return this._questionsService.getOptionImage(option);
+    return this._imageService.getImage(option.imageAddress);
   }
 
 }

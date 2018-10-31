@@ -4,5 +4,6 @@ export interface Specie {
     name: string;
     distribution: string;
     medicalImportance: boolean;
+    imageAddresses: String[];
 
 }

@@ -13,6 +13,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 import { SpeciesServiceProvider } from '../providers/species-service/species-service';
 import { QuestionsServiceProvider } from '../providers/questions-service/questions-service';
+import { DetailPage } from '../pages/detail/detail';
+import { ImageServiceProvider } from '../providers/image-service/image-service';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { QuestionsServiceProvider } from '../providers/questions-service/questio
     HomePage,
     SearchPage,
     KeyPage,
+    DetailPage,
     TabsPage
   ],
   imports: [
@@ -33,6 +36,7 @@ import { QuestionsServiceProvider } from '../providers/questions-service/questio
     HomePage,
     SearchPage,
     KeyPage,
+    DetailPage,
     TabsPage
   ],
   providers: [
@@ -40,7 +44,8 @@ import { QuestionsServiceProvider } from '../providers/questions-service/questio
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SpeciesServiceProvider,
-    QuestionsServiceProvider
+    QuestionsServiceProvider,
+    ImageServiceProvider
   ]
 })
 export class AppModule {}
