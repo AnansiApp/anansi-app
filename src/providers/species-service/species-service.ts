@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Specie } from '../../models/specie';
-
 import { GenericService } from '../generic-service';
 import { Option } from '../../models/option';
 
@@ -12,20 +11,22 @@ import { Option } from '../../models/option';
   and Angular DI.
 */
 @Injectable()
-export class SpeciesServiceProvider {
+export class SpeciesServiceProvider extends GenericService{
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) {
+    super();
+  }
 
   listSpecies() {
-    return this._http.get<Specie[]>('http://localhost:8080/api/spider/species');
+    return this._http.get<Specie[]>(this.apiUrl + '/spider/species');
   }
 
   getByName(name) {
-    return this._http.get<Specie[]>('http://localhost:8080/api/spider/species/get?name=' + name);
+    return this._http.get<Specie[]>(this.apiUrl + '/spider/species/get?name=' + name);
   }
 
   getImage(specie){
-    return this._http.get<Specie[]>('http://localhost:8080/api/spider/specie-image?name=' + specie);
+    return this._http.get<Specie[]>(this.apiUrl + '/spider/specie-image?name=' + specie);
   }
 
   getSpeciesByCharacteristcs(characteristcs: Option[]){

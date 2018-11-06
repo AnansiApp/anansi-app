@@ -71,9 +71,6 @@ export class KeyPage implements NavLifecycles{
         console.log(this.species);
       }
     );
-
-
-
     this._questionsService.getNextQuestion(this.currentQuestion.id, option.id)
     .subscribe(
       (question) => {
