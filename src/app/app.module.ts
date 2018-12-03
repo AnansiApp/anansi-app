@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SpeciesServiceProvider } from '../providers/species-service/species-service';
 import { QuestionsServiceProvider } from '../providers/questions-service/questions-service';
 import { DetailPage } from '../pages/detail/detail';
+import { SugestionsPage} from '../pages/sugestions/sugestions';
 import { ImageServiceProvider } from '../providers/image-service/image-service';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ImageServiceProvider } from '../providers/image-service/image-service';
     SearchPage,
     KeyPage,
     DetailPage,
+    SugestionsPage,
     TabsPage
   ],
   imports: [
@@ -37,6 +39,7 @@ import { ImageServiceProvider } from '../providers/image-service/image-service';
     SearchPage,
     KeyPage,
     DetailPage,
+    SugestionsPage,
     TabsPage
   ],
   providers: [
