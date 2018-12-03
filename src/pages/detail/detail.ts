@@ -11,7 +11,7 @@ import { ImageServiceProvider } from '../../providers/image-service/image-servic
 export class DetailPage {
 
   public specie: Specie;
-
+  private  images = [];
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private _imageService: ImageServiceProvider) {
@@ -19,11 +19,14 @@ export class DetailPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DetailPage');
   }
 
   getSpecieImages(){
-    console.log(this.specie);
-    return this._imageService.getImage(this.specie.imageAddresses);
+    this.images = [];
+
+    for( let address in this.specie.imageAddresses){
+      this.images.push(this._imageService.getImage(address));
+    }
+    return this.images;
   }
 }
