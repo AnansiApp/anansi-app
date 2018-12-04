@@ -15,6 +15,12 @@
           </ion-thumbnail>
           <p>{{option.description}}</p>
       </ion-item>
+      <ion-item (click)="selectResponse(null)">
+          <ion-thumbnail item-start>
+            <img src = "../assets/imgs/question.jpg">
+          </ion-thumbnail>
+          <p>Não vi / Não sei</p>
+      </ion-item>
     </ion-list>
 
 </ion-content>

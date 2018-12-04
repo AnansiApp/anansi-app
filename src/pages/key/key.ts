@@ -17,7 +17,7 @@ import { SugestionsPage } from '../sugestions/sugestions';
 export class KeyPage implements NavLifecycles{
 
   public currentQuestion: Question;
-  public questions: Question[];
+  public questions: Question[] = [];
   public characteristcs: Option[] = [];
   public species: Specie[];
 
@@ -43,6 +43,7 @@ export class KeyPage implements NavLifecycles{
     .subscribe(
       (question) => {
         this.currentQuestion = question;
+        this.questions.push(question);
       },
       (err: HttpErrorResponse) => {
         this._alertCtrl.create({
@@ -57,30 +58,43 @@ export class KeyPage implements NavLifecycles{
   }
 
   selectResponse(option: Option){
-    this.characteristcs.push(option);
-    let loading = this._loadingCtrl.create({
-      content: "Carregando..."
-    });
-
-    loading.present();
-    this._speciesService.getSpeciesByCharacteristcs(this.characteristcs).
-    subscribe(
-      (species) => {
-        this.species = species;
-        if(this.species.length < 2){
-          this.navCtrl.push(SugestionsPage, {
-            species :this.species
-          })
+    console.log(this.questions);
+    if(option === null){
+      console.log("Entrou aqui");
+      this._questionsService.getNextQuestionNoOption(this.questions)
+      .subscribe(
+        (question) => {
+          this.questions.push(question);
+          this.currentQuestion = question;
         }
-        loading.dismiss();
-      }
-    );
-    this._questionsService.getNextQuestion(this.currentQuestion.id, option.id)
-    .subscribe(
-      (question) => {
-        this.currentQuestion = question;
-      }
-    )
+      )
+    } else{
+      this.characteristcs.push(option);
+      let loading = this._loadingCtrl.create({
+        content: "Carregando..."
+      });
+
+      loading.present();
+      this._speciesService.getSpeciesByCharacteristcs(this.characteristcs).
+      subscribe(
+        (species) => {
+          this.species = species;
+          if(this.species.length < 2){
+            this.navCtrl.push(SugestionsPage, {
+              species :this.species
+            })
+          }
+          loading.dismiss();
+        }
+      );
+      this._questionsService.getNextQuestion(this.currentQuestion.id, option.id)
+      .subscribe(
+        (question) => {
+          this.questions.push(question);
+          this.currentQuestion = question;
+        }
+      )
+    }
   }
 
   getOptionImage(option: Option){
