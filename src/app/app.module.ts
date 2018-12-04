@@ -16,6 +16,7 @@ import { QuestionsServiceProvider } from '../providers/questions-service/questio
 import { DetailPage } from '../pages/detail/detail';
 import { SugestionsPage} from '../pages/sugestions/sugestions';
 import { ImageServiceProvider } from '../providers/image-service/image-service';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ImageServiceProvider } from '../providers/image-service/image-service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicImageViewerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

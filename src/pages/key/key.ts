@@ -84,7 +84,13 @@ export class KeyPage implements NavLifecycles{
   }
 
   getOptionImage(option: Option){
-    return this._imageService.getImage(option.imageAddress);
+    var image = this._imageService.getImage(option.imageAddress);
+    console.log(image);
+    if(image === undefined || image == null){
+      console.log("Entrou aqui");
+      image = '../assets/imgs/anansi.png'
+    }
+    return image;
   }
 
 }

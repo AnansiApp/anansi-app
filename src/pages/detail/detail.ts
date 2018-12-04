@@ -16,17 +16,20 @@ export class DetailPage {
     public navParams: NavParams,
     private _imageService: ImageServiceProvider) {
     this.specie = this.navParams.get('specie');
+    this.images = [];
+
+    for(let address of this.specie.imageAddresses){
+      console.log(address);
+      this.images.push(this._imageService.getImage(address));
+    }
+    if(this.images === undefined || this.images.length == 0){
+      this.images.push('../assets/imgs/anansi.png');
+    }
+
   }
 
   ionViewDidLoad() {
+   
   }
 
-  getSpecieImages(){
-    this.images = [];
-
-    for( let address in this.specie.imageAddresses){
-      this.images.push(this._imageService.getImage(address));
-    }
-    return this.images;
-  }
 }
