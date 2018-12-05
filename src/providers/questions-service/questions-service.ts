@@ -28,11 +28,10 @@ export class QuestionsServiceProvider extends GenericService{
 
   getNextQuestionNoOption(questions: Question[]){
     var ids = "";
-    console.log(questions);
     questions.forEach(question => {
       ids+= "id=" + question.id + "&"; 
     });
-    return this._http.get<Question>(this.apiUrl + '/question/next_question_index_random?' + ids)
+    return this._http.get<Question>(this.apiUrl + '/question/next_question_index_random?' + ids);
   }
   
 

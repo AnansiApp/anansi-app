@@ -9,6 +9,8 @@ import { ImageServiceProvider } from '../../providers/image-service/image-servic
 import { SpeciesServiceProvider } from '../../providers/species-service/species-service';
 import { Specie } from '../../models/specie';
 import { SugestionsPage } from '../sugestions/sugestions';
+import { ToastController } from 'ionic-angular';
+
 
 @Component({
   selector: 'page-key',
@@ -26,12 +28,15 @@ export class KeyPage implements NavLifecycles{
     private _questionsService: QuestionsServiceProvider,
     private _speciesService: SpeciesServiceProvider,
     private _imageService: ImageServiceProvider,
+    private _toastCtrl: ToastController,
     private _alertCtrl: AlertController) {
     }
 
   ionViewDidLoad() {
     this.getFirstQuestion();
     this.characteristcs = [];
+    this.questions = [];
+    this.species = [];
   }
 
   ionViewDidEnter(){
@@ -58,14 +63,17 @@ export class KeyPage implements NavLifecycles{
   }
 
   selectResponse(option: Option){
-    console.log(this.questions);
     if(option === null){
-      console.log("Entrou aqui");
       this._questionsService.getNextQuestionNoOption(this.questions)
       .subscribe(
         (question) => {
+          console.log(question);
           this.questions.push(question);
           this.currentQuestion = question;
+        },
+        err => {
+          this.showToastMessage("As informações fornecidas não foram suficientes para encontrar um resultado :(");
+          this.ionViewDidLoad();
         }
       )
     } else{
@@ -79,10 +87,13 @@ export class KeyPage implements NavLifecycles{
       subscribe(
         (species) => {
           this.species = species;
-          if(this.species.length < 2){
+          if(this.species.length < 2 && this.species.length > 0){
             this.navCtrl.push(SugestionsPage, {
               species :this.species
             })
+          }else if(this.species.length === 0){
+            this.showToastMessage("Não foram encontrados resultados com as características informadas :( Tente Novamente");
+            this.ionViewDidLoad();
           }
           loading.dismiss();
         }
@@ -97,11 +108,21 @@ export class KeyPage implements NavLifecycles{
     }
   }
 
+  async showToastMessage(message){
+    const toast = this._toastCtrl.create({
+      message: message,
+      duration: 5000,
+      position: "middle"
+    });
+    toast.present();
+    setTimeout(() => {
+    }, 5000);
+  }
+
   getOptionImage(option: Option){
     var image = this._imageService.getImage(option.imageAddress);
     console.log(image);
     if(image === undefined || image == null){
-      console.log("Entrou aqui");
       image = '../assets/imgs/anansi.png'
     }
     return image;
