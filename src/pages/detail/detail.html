@@ -20,11 +20,11 @@
   </ion-item-divider>
   <ion-item>Distribuição: {{specie.distribution}}</ion-item>
   <ion-item>Possui impotância médica? {{specie.medicalImportance}}</ion-item>
-  
-  <ion-slides class="image-slider" loop="true" slidesPerView="2">
-    <ion-slide *ngFor="let img of images">
-      <img style="  width: 100%; height: 100%;" src="{{img}}" imageViewer/>
-    </ion-slide>
-  </ion-slides>
-  
+  <ion-note>
+    <ion-slides class="image-slider" effect="cube" loop="true" slidesPerView="1" centeredSlides="true" >
+      <ion-slide *ngFor="let img of images">
+        <img src="{{img}}" imageViewer/>
+      </ion-slide>
+    </ion-slides>
+  </ion-note>  
 </ion-content>
