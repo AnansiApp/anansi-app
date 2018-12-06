@@ -16,10 +16,10 @@
 <ion-content padding>
 
   <ion-item-divider color="light">
-    <h3>{{specie.name}}</h3>
+    <h3>{{family.name}}</h3>
   </ion-item-divider>
-  <ion-item>Distribuição: {{specie.distribution}}</ion-item>
-  <ion-item>Possui impotância médica? {{specie.medicalImportance}}</ion-item>
+  <ion-item>Distribuição: {{family.distribution}}</ion-item>
+  <ion-item>Possui impotância médica? {{family.medicalImportance}}</ion-item>
   
   <ion-slides class="image-slider" loop="true" slidesPerView="2">
     <ion-slide *ngFor="let img of images">

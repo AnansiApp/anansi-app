@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams} from 'ionic-angular';
-import { Specie } from '../../models/specie';
+import { Family } from '../../models/family';
 import { DetailPage } from '../detail/detail';
 
 /**
@@ -17,19 +17,19 @@ import { DetailPage } from '../detail/detail';
 })
 export class SugestionsPage {
 
-  public species: Specie[];
+  public families: Family[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.species = this.navParams.get('species');
+    this.families = this.navParams.get('families');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SugestionsPage');
   }
 
-  selectSpecie(specie: Specie){
+  selectFamily(family: Family){
     this.navCtrl.push(DetailPage, {
-      specie: specie
+      family: family
     });
 }
 

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
 import { HttpErrorResponse } from '@angular/common/http'
-import { Specie } from '../../models/specie';
-import { SpeciesServiceProvider } from '../../providers/species-service/species-service';
+import { Family } from '../../models/family';
+import { FamiliesServiceProvider } from '../../providers/families-service/families-service';
 import { NavLifecycles } from '../../utils/ionic/nav/nav-lifecycle';
 import { DetailPage } from '../detail/detail';
 
@@ -12,43 +12,43 @@ import { DetailPage } from '../detail/detail';
 })
 export class SearchPage implements NavLifecycles {
 
-  public species: Specie[];
+  public families: Family[];
 
   constructor(public navCtrl: NavController, 
     private _loadingCtrl: LoadingController,
-    private _speciesService: SpeciesServiceProvider,
+    private _familiesService: FamiliesServiceProvider,
     private _alertCtrl: AlertController) {}
 
   ionViewDidLoad() {
-      this.loadSpecies();
+      this.loadFamilies();
   }
 
-  getSpecies(ev: any){
+  getFamilies(ev: any){
     let loading = this._loadingCtrl.create({
       content: "Carregando..."
     });
     const filter = ev.target.value;
-    this._speciesService.getByName(filter)
+    this._familiesService.getByName(filter)
     .subscribe(
-      (species) => {
-        this.species = species;
+      (families) => {
+        this.families = families;
         loading.dismiss();
       },
     );      
 
     }
 
-    loadSpecies(filter?){
+    loadFamilies(filter?){
       let loading = this._loadingCtrl.create({
         content: "Carregando..."
       });
   
       loading.present();
   
-      this._speciesService.listSpecies()
+      this._familiesService.listFamilies()
       .subscribe(
-        (species) => {
-          this.species = species;
+        (families) => {
+          this.families = families;
           loading.dismiss();
         },
         (err: HttpErrorResponse) => {
@@ -64,9 +64,9 @@ export class SearchPage implements NavLifecycles {
       );
     }
 
-  selectSpecie(specie: Specie){
+  selectFamily(family: Family){
       this.navCtrl.push(DetailPage, {
-        specie: specie
+        family: family
       });
   }
 

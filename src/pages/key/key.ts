@@ -6,8 +6,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NavLifecycles } from '../../utils/ionic/nav/nav-lifecycle';
 import { Option } from '../../models/option';
 import { ImageServiceProvider } from '../../providers/image-service/image-service';
-import { SpeciesServiceProvider } from '../../providers/species-service/species-service';
-import { Specie } from '../../models/specie';
+import { FamiliesServiceProvider } from '../../providers/families-service/families-service';
+import { Family } from '../../models/family';
 import { SugestionsPage } from '../sugestions/sugestions';
 import { ToastController } from 'ionic-angular';
 
@@ -21,12 +21,12 @@ export class KeyPage implements NavLifecycles{
   public currentQuestion: Question;
   public questions: Question[] = [];
   public characteristcs: Option[] = [];
-  public species: Specie[];
+  public families: Family[];
 
   constructor(public navCtrl: NavController,
     private _loadingCtrl: LoadingController,
     private _questionsService: QuestionsServiceProvider,
-    private _speciesService: SpeciesServiceProvider,
+    private _familiesService: FamiliesServiceProvider,
     private _imageService: ImageServiceProvider,
     private _toastCtrl: ToastController,
     private _alertCtrl: AlertController) {
@@ -36,7 +36,7 @@ export class KeyPage implements NavLifecycles{
     this.getFirstQuestion();
     this.characteristcs = [];
     this.questions = [];
-    this.species = [];
+    this.families = [];
   }
 
   ionViewDidEnter(){
@@ -83,15 +83,15 @@ export class KeyPage implements NavLifecycles{
       });
 
       loading.present();
-      this._speciesService.getSpeciesByCharacteristcs(this.characteristcs).
+      this._familiesService.getFamiliesByCharacteristcs(this.characteristcs).
       subscribe(
-        (species) => {
-          this.species = species;
-          if(this.species.length < 2 && this.species.length > 0){
+        (families) => {
+          this.families = families;
+          if(this.families.length < 2 && this.families.length > 0){
             this.navCtrl.push(SugestionsPage, {
-              species :this.species
+              families :this.families
             })
-          }else if(this.species.length === 0){
+          }else if(this.families.length === 0){
             this.showToastMessage("Não foram encontrados resultados com as características informadas :( Tente Novamente");
             this.ionViewDidLoad();
           }

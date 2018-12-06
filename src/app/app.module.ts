@@ -11,7 +11,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
-import { SpeciesServiceProvider } from '../providers/species-service/species-service';
+import { FamiliesServiceProvider } from '../providers/families-service/families-service';
 import { QuestionsServiceProvider } from '../providers/questions-service/questions-service';
 import { DetailPage } from '../pages/detail/detail';
 import { SugestionsPage} from '../pages/sugestions/sugestions';
@@ -48,7 +48,7 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SpeciesServiceProvider,
+    FamiliesServiceProvider,
     QuestionsServiceProvider,
     ImageServiceProvider
   ]

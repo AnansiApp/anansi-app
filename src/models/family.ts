@@ -1,4 +1,4 @@
-export interface Specie {
+export interface Family {
 
     id: number;
     name: string;
