@@ -16,10 +16,14 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item *ngFor= "let family of families" (click)="selectFamily(family)"text-wrap>
+    <ion-item *ngFor= "let family of families" (click)="selectFamily(family)" text-wrap>
       <h2>{{family.name}}</h2>
-      <p>Nome Popular: {{family.popularName}}</p>
+      <ion-thumbnail item-start>
+        <img [src] = getPrincipalImage(family.principalImage) imageViewer>
+      </ion-thumbnail>
+      <p>Nome popular: {{family.popularName}}</p>
     </ion-item>
   </ion-list>
 
 </ion-content>
+

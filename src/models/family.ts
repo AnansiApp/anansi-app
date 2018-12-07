@@ -11,4 +11,5 @@ export interface Family {
     othersCharacteristics: string;
     timeYear: string;
     families: string[];
+    principalImage: string;
 }

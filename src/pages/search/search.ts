@@ -5,6 +5,7 @@ import { Family } from '../../models/family';
 import { FamiliesServiceProvider } from '../../providers/families-service/families-service';
 import { NavLifecycles } from '../../utils/ionic/nav/nav-lifecycle';
 import { DetailPage } from '../detail/detail';
+import { ImageServiceProvider } from '../../providers/image-service/image-service';
 
 @Component({
   selector: 'page-search',
@@ -17,6 +18,7 @@ export class SearchPage implements NavLifecycles {
   constructor(public navCtrl: NavController, 
     private _loadingCtrl: LoadingController,
     private _familiesService: FamiliesServiceProvider,
+    private _imageService: ImageServiceProvider,
     private _alertCtrl: AlertController) {}
 
   ionViewDidLoad() {
@@ -69,5 +71,16 @@ export class SearchPage implements NavLifecycles {
         family: family
       });
   }
+
+  getPrincipalImage(address: String){
+    var image = this._imageService.getImage(address);
+    console.log(image);
+    if(image === undefined || image == null){
+      image = '../assets/imgs/anansi.png'
+    }
+    return image;
+  }
+
+
 
 }

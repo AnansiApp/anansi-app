@@ -88,7 +88,6 @@ export class KeyPage implements NavLifecycles{
       this._questionsService.getNextQuestion(this.questions, this.characteristcs, this.currentQuestion.id, option)
       .subscribe(
         (question) => {
-          console.log(question);
           if(question == null){
             if(this.families.length > 0){
               this.navCtrl.push(SugestionsPage, {
@@ -98,6 +97,7 @@ export class KeyPage implements NavLifecycles{
           }
           this.questions.push(question);
           this.currentQuestion = question;
+          loading.dismiss();
         },
         (err) => {
           if(this.families.length > 0){
@@ -108,9 +108,9 @@ export class KeyPage implements NavLifecycles{
             this.showToastMessage("As informações fornecidas não foram suficientes para encontrar um resultado :(  Tente novamente!!");
             this.ionViewDidLoad();
           }
+          loading.dismiss();
         }
       )
-      loading.dismiss();
     
   }
 
@@ -127,7 +127,6 @@ export class KeyPage implements NavLifecycles{
 
   getOptionImage(option: Option){
     var image = this._imageService.getImage(option.imageAddress);
-    console.log(image);
     if(image === undefined || image == null){
       image = '../assets/imgs/anansi.png'
     }

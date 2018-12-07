@@ -11,9 +11,13 @@
   <ion-searchbar (ionInput)="getFamilies($event)"></ion-searchbar>
 
   <ion-list>
-    <ion-item *ngFor= "let family of families" (click)="selectFamily(family)">
+    <ion-item *ngFor= "let family of families" (click)="selectFamily(family)" text-wrap>
       <h2>{{family.name}}</h2>
+      <ion-thumbnail item-start>
+        <img [src] = getPrincipalImage(family.principalImage) imageViewer>
+      </ion-thumbnail>
       <p>Nome popular: {{family.popularName}}</p>
     </ion-item>
   </ion-list>
 </ion-content>
+
