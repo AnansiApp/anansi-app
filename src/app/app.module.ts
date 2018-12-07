@@ -13,10 +13,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 import { FamiliesServiceProvider } from '../providers/families-service/families-service';
 import { QuestionsServiceProvider } from '../providers/questions-service/questions-service';
-import { DetailPage } from '../pages/detail/detail';
 import { SugestionsPage} from '../pages/sugestions/sugestions';
 import { ImageServiceProvider } from '../providers/image-service/image-service';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
+import { DetailPageModule } from '../pages/detail/detail.module';
+import { SugestionsPageModule } from '../pages/sugestions/sugestions.module';
 
 @NgModule({
   declarations: [
@@ -24,13 +25,13 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     HomePage,
     SearchPage,
     KeyPage,
-    DetailPage,
-    SugestionsPage,
     TabsPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    DetailPageModule,
+    SugestionsPageModule,
     IonicModule.forRoot(MyApp),
     IonicImageViewerModule
   ],
@@ -40,7 +41,6 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     HomePage,
     SearchPage,
     KeyPage,
-    DetailPage,
     SugestionsPage,
     TabsPage
   ],
