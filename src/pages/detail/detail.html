@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Espécie</ion-title>
+    <ion-title>{{family.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,16 +15,81 @@
 
 <ion-content padding>
 
-  <ion-item-divider color="light">
-    <h3>{{family.name}}</h3>
-  </ion-item-divider>
-  <ion-item>Distribuição: {{family.distribution}}</ion-item>
-  <ion-item>Possui impotância médica? {{family.medicalImportance}}</ion-item>
+  <ion-card>
+    <ion-card-header>
+      Nome popular:
+    </ion-card-header>
+    <ion-card-content>
+      {{family.popularName}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Impotância médica:
+    </ion-card-header>
+    <ion-card-content>
+      {{family.medicalImportance}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Hábito de vida:
+    </ion-card-header>
+    <ion-card-content>
+      {{family.habitLife}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Tamanho:
+    </ion-card-header>
+    <ion-card-content>
+      {{family.size}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Olhos:
+    </ion-card-header>
+    <ion-card-content>
+      {{family.eyes}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Época do ano:
+    </ion-card-header>
+    <ion-card-content>
+      {{family.timeYear}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Outras características:
+    </ion-card-header>
+    <ion-card-content>
+      {{family.othersCharacteristics}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Fotos:
+    </ion-card-header>
+    <ion-card-content>
+      <ion-slides class="image-slider" loop="true" slidesPerView="1" effect="cube">
+        <ion-slide *ngFor="let img of images">
+          <img style="  width: 100%; height: 100%;" src="{{img}}" imageViewer/>
+        </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+  </ion-card>
   
-  <ion-slides class="image-slider" loop="true" slidesPerView="2">
-    <ion-slide *ngFor="let img of images">
-      <img style="  width: 100%; height: 100%;" src="{{img}}" imageViewer/>
-    </ion-slide>
-  </ion-slides>
   
 </ion-content>
