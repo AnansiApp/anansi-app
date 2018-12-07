@@ -6,21 +6,29 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-list>
-      <ion-list-header text-wrap>{{currentQuestion?.content}}</ion-list-header>
-      <ion-item *ngFor= "let option of currentQuestion?.options" (click)="selectResponse(option)" text-wrap>
-          <ion-thumbnail item-start>
-            <img [src] = getOptionImage(option) imageViewer>
-          </ion-thumbnail>
-          <p>{{option.description}}</p>
-      </ion-item>
-      <ion-item (click)="selectResponse(null)">
-          <ion-thumbnail item-start>
-            <img src = "../assets/imgs/question.jpg">
-          </ion-thumbnail>
-          <p>Não vi / Não sei</p>
-      </ion-item>
-    </ion-list>
+<ion-content>
+
+  <ion-card>
+      <ion-card-header>
+        {{currentQuestion?.content}}
+      </ion-card-header>
+      <ion-card-content>
+          <ion-list>
+              <ion-item *ngFor= "let option of currentQuestion?.options" (click)="selectResponse(option)" text-wrap>
+                  <ion-thumbnail item-start>
+                    <img [src] = getOptionImage(option) imageViewer>
+                  </ion-thumbnail>
+                  <p>{{option.description}}</p>
+              </ion-item>
+              <ion-item (click)="selectResponse(null)">
+                  <ion-thumbnail item-start>
+                    <img src = "../assets/imgs/question.jpg">
+                  </ion-thumbnail>
+                  <p>Não vi / Não sei</p>
+              </ion-item>
+            </ion-list>
+      </ion-card-content>
+    </ion-card>
+    
 
 </ion-content>

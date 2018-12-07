@@ -13,7 +13,7 @@
   <ion-list>
     <ion-item *ngFor= "let family of families" (click)="selectFamily(family)">
       <h2>{{family.name}}</h2>
-      <p>Onde: {{family.distribution}}</p>
+      <p>Nome popular: {{family.popularName}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

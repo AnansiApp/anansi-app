@@ -63,25 +63,12 @@ export class KeyPage implements NavLifecycles{
   }
 
   selectResponse(option: Option){
-    if(option === null){
-      this._questionsService.getNextQuestionNoOption(this.questions)
-      .subscribe(
-        (question) => {
-          console.log(question);
-          this.questions.push(question);
-          this.currentQuestion = question;
-        },
-        err => {
-          this.showToastMessage("As informações fornecidas não foram suficientes para encontrar um resultado :(");
-          this.ionViewDidLoad();
-        }
-      )
-    } else{
-      this.characteristcs.push(option);
+      if(option !== null){
+        this.characteristcs.push(option);
+      }
       let loading = this._loadingCtrl.create({
         content: "Carregando..."
       });
-
       loading.present();
       this._familiesService.getFamiliesByCharacteristcs(this.characteristcs).
       subscribe(
@@ -91,21 +78,40 @@ export class KeyPage implements NavLifecycles{
             this.navCtrl.push(SugestionsPage, {
               families :this.families
             })
-          }else if(this.families.length === 0){
+          }else if(this.families.length === 0 && this.characteristcs.length !== 0){
             this.showToastMessage("Não foram encontrados resultados com as características informadas :( Tente Novamente");
             this.ionViewDidLoad();
+            loading.dismiss();
           }
-          loading.dismiss();
         }
       );
-      this._questionsService.getNextQuestion(this.currentQuestion.id, option.id)
+      this._questionsService.getNextQuestion(this.questions, this.characteristcs, this.currentQuestion.id, option)
       .subscribe(
         (question) => {
+          console.log(question);
+          if(question == null){
+            if(this.families.length > 0){
+              this.navCtrl.push(SugestionsPage, {
+                families :this.families
+              })
+            } 
+          }
           this.questions.push(question);
           this.currentQuestion = question;
+        },
+        (err) => {
+          if(this.families.length > 0){
+            this.navCtrl.push(SugestionsPage, {
+              families :this.families
+            })
+          }else{
+            this.showToastMessage("As informações fornecidas não foram suficientes para encontrar um resultado :(  Tente novamente!!");
+            this.ionViewDidLoad();
+          }
         }
       )
-    }
+      loading.dismiss();
+    
   }
 
   async showToastMessage(message){

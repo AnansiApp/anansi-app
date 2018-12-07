@@ -31,10 +31,16 @@ export class FamiliesServiceProvider extends GenericService{
 
   getFamiliesByCharacteristcs(characteristcs: Option[]){
     var ids = "";
-    characteristcs.forEach(characteristc => {
-      ids+= "id=" + characteristc.id + "&"; 
-    });
-    return this._http.get<Family[]>(this.apiUrl + '/spider/characteristics?' + ids)
+
+    if(characteristcs.length === 0){
+      ids = "id=";
+    } else {
+      characteristcs.forEach(characteristc => {
+        ids+= "id=" + characteristc.id + "&"; 
+      });
+    }
+
+    return this._http.get<Family[]>(this.apiUrl + '/spider/characteristics?' + ids + '&')
   }
 
 }

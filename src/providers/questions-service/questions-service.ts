@@ -21,17 +21,25 @@ export class QuestionsServiceProvider extends GenericService{
     return this._http.get<Question>(this.apiUrl + '/question/first_question');
   }
 
-  getNextQuestion(questionId, optionId){
-    return this._http.get<Question>(this.apiUrl + '/question/next_question?idCurrentQuestion=' 
-    + questionId + '&idOption=' + optionId);
-  }
-
-  getNextQuestionNoOption(questions: Question[]){
-    var ids = "";
+  getNextQuestion(questions: Question[], options: Option[], questionId, option){
+    var idsQuestions = "";
+    var idsOptions = "";
+    var idOption = "";
     questions.forEach(question => {
-      ids+= "id=" + question.id + "&"; 
+      idsQuestions+= "idQuestions=" + question.id + "&"; 
     });
-    return this._http.get<Question>(this.apiUrl + '/question/next_question_index_random?' + ids);
+
+    options.forEach(option => {
+      idsOptions+= "idCharacteristics=" + option.id + "&";
+    });
+
+    if(option !== null){
+      idOption = '&idOption=' +option.id;
+    }
+
+    return this._http.get<Question>(this.apiUrl + '/question/next_question?idCurrentQuestion=' 
+    + questionId + idOption + '&' + idsQuestions + '&' + idsOptions);  
+  
   }
   
 
