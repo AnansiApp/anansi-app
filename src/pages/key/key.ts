@@ -22,6 +22,7 @@ export class KeyPage implements NavLifecycles{
   public questions: Question[] = [];
   public characteristcs: Option[] = [];
   public families: Family[];
+  public isFirstQuestion : Boolean;
 
   constructor(public navCtrl: NavController,
     private _loadingCtrl: LoadingController,
@@ -37,6 +38,7 @@ export class KeyPage implements NavLifecycles{
     this.characteristcs = [];
     this.questions = [];
     this.families = [];
+    this.isFirstQuestion = true;
   }
 
   ionViewDidEnter(){
@@ -63,6 +65,7 @@ export class KeyPage implements NavLifecycles{
   }
 
   selectResponse(option: Option){
+      this.isFirstQuestion = false;
       if(option !== null){
         this.characteristcs.push(option);
       }
@@ -97,6 +100,7 @@ export class KeyPage implements NavLifecycles{
           }
           this.questions.push(question);
           this.currentQuestion = question;
+          console.log(this.questions);
           loading.dismiss();
         },
         (err) => {
@@ -131,6 +135,10 @@ export class KeyPage implements NavLifecycles{
       image = '../assets/imgs/anansi.png'
     }
     return image;
+  }
+
+  restart(){
+    this.ionViewDidLoad();
   }
 
 }
