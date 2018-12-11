@@ -3,7 +3,9 @@ export class GenericService {
     apiUrl : String;
 
     constructor(){
-        this.apiUrl = 'https://fast-falls-79825.herokuapp.com//api';
+        // this.apiUrl = 'https://anansi-unb.herokuapp.com/api';
+        this.apiUrl = 'http://localhost:8080/api';
+
     }
 
 }
