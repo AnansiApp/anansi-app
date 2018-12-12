@@ -30,14 +30,17 @@ export class SearchPage implements NavLifecycles {
       content: "Carregando..."
     });
     const filter = ev.target.value;
-    this._familiesService.getByName(filter)
-    .subscribe(
-      (families) => {
-        this.families = families;
-        loading.dismiss();
-      },
-    );      
-
+    if(filter){
+      this._familiesService.getByName(filter)
+      .subscribe(
+        (families) => {
+          this.families = families;
+          loading.dismiss();
+        },
+      ); 
+    }else{
+      this.loadFamilies();
+    }
     }
 
     loadFamilies(filter?){
